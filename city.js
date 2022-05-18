@@ -145,7 +145,7 @@ function showFormDetailCity(id) {
 function showFormDeleteCity (id) {
     let footer = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="deleteCity(${id})">Delete</button>`;
-    $("#delete_modalCity").html(footer);
+    $("#delete_footerCity").html(footer);
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/cities/${id}`,
@@ -158,6 +158,7 @@ function deleteCity(id) {
             type: "DELETE",
             url: `http://localhost:8080/cities/${id}`,
             success: function () {
+                $("#delete_modalCity").modal('hide');
                 showListCity();
             }
         })
