@@ -51,9 +51,8 @@ function getAllCountry () {
 getAllCountry();
 
 function createCity() {
-    event.preventDefault();
     let name = $("#createNameCity").val();
-    let country = $("#listCountry").val();
+    let country = $("#listCreateCountry").val();
     let acreage = $("#createAcreageCity").val();
     let population = $("#createPopulationCity").val()
     let gdp = $("#createGDPCity").val();
