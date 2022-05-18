@@ -10,7 +10,7 @@ function showListCity() {
 <td>${data[i].name}</td>
 <td>${data[i].country.name}</td>
 <td><button class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#edit_modalCity" onclick="showFormEditCity(${data[i].id})">Edit</button></td>
-<td><a href="${data[i].id}" onclick="deleteCity(this)"><button class="btn btn-danger">Delete</button></a></td>
+<td><button class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#delete_modalCity" onclick="showFormDeleteCity(${data[i].id})">Delete</button></td>
 <td><button class="btn btn-dark" role="button" data-bs-toggle="modal" data-bs-target="#detail_modalCity" onclick="showFormDetailCity(${data[i].id})">Detail</button></td>
 </tr>`
             }
@@ -142,19 +142,23 @@ function showFormDetailCity(id) {
         }
     })
 }
+function showFormDeleteCity (id) {
+    let footer = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="deleteCity(${id})">Delete</button>`;
+    $("#delete_modalCity").html(footer);
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/cities/${id}`,
+        success: function () {}
+    })
+}
 
-function deleteCity(element) {
-    event.preventDefault();
-    let cityId = element.getAttribute("href");
-    if (confirm("Yes") === true) {
+function deleteCity(id) {
         $.ajax({
             type: "DELETE",
-            url: `http://localhost:8080/cities/${cityId}`,
+            url: `http://localhost:8080/cities/${id}`,
             success: function () {
                 showListCity();
             }
         })
-    } else {
-        window.location.href = "city.html";
-    }
 }
